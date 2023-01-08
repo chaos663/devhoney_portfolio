@@ -41,34 +41,28 @@
 
 				<!-- Main -->
 					<div id="main">
-
 						<!-- Post -->
-							<section class="post">
-								<header class="major">
-									<span class="date">April 25, 2017</span>
-									<h1>This is a<br />
-									contactme Page</h1>
-									<p>Aenean ornare velit lacus varius enim ullamcorper proin aliquam<br />
-									facilisis ante sed etiam magna interdum congue. Lorem ipsum dolor<br />
-									amet nullam sed etiam veroeros.</p>
-								</header>
-								<div class="image main"><img src="images/pic01.jpg" alt="" /></div>
-								<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur sapien risus, commodo eget turpis at, elementum convallis enim turpis, lorem ipsum dolor sit amet nullam.</p>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus. Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum.</p>
-							</section>
-
-					</div>
-
-				<!-- Footer -->
-				<!-- <footer id="footer">
+						<!-- Footer -->
+				<footer id="footer">
+					
 					<section class="split contact">
+						
+						<section><h2></h2></section>
 						<section class="alt">
 							<h3>Address</h3>
 							<p>서울특별시 금천구</p>
 						</section>
+						<section class="alt">
+							<h3>Name</h3>
+							<p>Yang Jeong Heon</p>
+						</section>
 						<section>
 							<h3>Kakao Id</h3>
-							<p>ID : Rs1991</p>
+							<p>Rs1991</p>
+						</section>
+						<section>
+							<h3>Phone</h3>
+							<p> 010 - 3528 -8571</p>
 						</section>
 						<section>
 							<h3>Email</h3>
@@ -76,7 +70,7 @@
 						</section>
 						<section>
 							<h3>Social</h3>
-							<ul class="icons alt">
+							<ul class="icons alt" style="display: flex;">
 								<li><a href="https://dev-honey.notion.site/a0078c5035f4450e868835c1c2f8cc30" class="fa-solid fas fa-cube">  Notion  </a></li>
 								
 								<li><a href="https://velog.io/@chaos663" class="fa-brands fab fa-blogger">  Velog</a></li>
@@ -85,7 +79,9 @@
 							</ul>
 						</section>
 					</section>
-				</footer> -->
+				</footer>
+
+					</div>
 
 			<!-- Copyright -->
 		<div id="copyright" 
@@ -139,4 +135,70 @@
 			<script src="assets/js/main.js"></script>
 
 	</body>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function (event) {
+			// array with texts to type in typewriter
+			var dataText = ["궁금하신 사항은 아래로 연락주시면 감사하겠습니다."];
+
+			// type one text in the typwriter
+			// keeps calling itself until the text is finished
+			function typeWriter(text, i, fnCallback) {
+				// chekc if text isn't finished yet
+				if (i < (text.length)) {
+					// add next character to h1
+					document.querySelector("h2").innerHTML = text.substring(0, i + 1) + '<span aria-hidden="true"></span>';
+
+					// wait for a while and call this function again for next character
+					setTimeout(function () {
+						typeWriter(text, i + 1, fnCallback)
+					}, 100);
+				}
+				// text finished, call callback if there is a callback function
+				else if (typeof fnCallback == 'function') {
+					// call callback after timeout
+					setTimeout(fnCallback, 700);
+				}
+			}
+			// start a typewriter animation for a text in the dataText array
+			function StartTextAnimation(i) {
+				if (typeof dataText[i] == 'undefined') {
+					setTimeout(function () {
+						StartTextAnimation(0);
+					}, 20000);
+				}
+				// check if dataText[i] exists
+				if (i < dataText[i].length) {
+					// text exists! start typewriter animation
+					typeWriter(dataText[i], 0, function () {
+						// after callback (and whole text has been animated), start next text
+						StartTextAnimation(i + 1);
+					});
+				}
+			}
+			// start the text animation
+			StartTextAnimation(0);
+		});
+
+	</script>
+
+
+	<style>
+		h1 {
+			font-size: 5em;
+			color: white;
+			text-transform: uppercase;
+		}
+
+		span {
+			border-right: .05em solid;
+			animation: caret 1s steps(1) infinite;
+		}
+
+		@keyframes caret {
+			50% {
+				border-color: transparent;
+			}
+		}
+	</style>
 </html>
