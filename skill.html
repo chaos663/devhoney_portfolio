@@ -1,9 +1,4 @@
 <!DOCTYPE HTML>
-<!--
-	Massively by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 	<head>
 		<title>Developer Honey's PortFolio</title>
@@ -47,20 +42,20 @@
 								<header class="major">
 									<h1>My Skill</h1>
 								</header>
-								<div class="progressbar-container">
-									<progressbar v-for="(item, index) in items" :target="item.value">
-									  <div class="progress-value" slot-scope="props">
-										<span class="lang">{{ item.key }}</span>
-										<span :class="props.text">{{ item.value }} %</span>
-									  </div>
-									</progressbar>
-								  </div>
-								  
-								  <progress value-="50" max="100"/>
 								
 							</section>
 
 					</div>
+					<div class="progressbar-container">
+						<progressbar v-for="(item, index) in items" :target="item.value">
+						  <div class="progress-value" slot-scope="props">
+							<span class="lang">{{ item.key }}</span>
+							<span :class="props.text">{{ item.value }} %</span>
+						  </div>
+						</progressbar>
+					  </div>
+					  
+					  <progress value-="50" max="100"/>
 
 
 			<!-- Copyright -->
