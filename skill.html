@@ -45,47 +45,23 @@
 						<!-- Post -->
 							<section class="post">
 								<header class="major">
-									<span class="date">April 25, 2017</span>
-									<h1>This is a<br />
-									career page</h1>
-									<p>Aenean ornare velit lacus varius enim ullamcorper proin aliquam<br />
-									facilisis ante sed etiam magna interdum congue. Lorem ipsum dolor<br />
-									amet nullam sed etiam veroeros.</p>
+									<h1>My Skill</h1>
 								</header>
-								<div class="image main"><img src="images/pic01.jpg" alt="" /></div>
-								<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur sapien risus, commodo eget turpis at, elementum convallis enim turpis, lorem ipsum dolor sit amet nullam.</p>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus. Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum.</p>
+								<div class="progressbar-container">
+									<progressbar v-for="(item, index) in items" :target="item.value">
+									  <div class="progress-value" slot-scope="props">
+										<span class="lang">{{ item.key }}</span>
+										<span :class="props.text">{{ item.value }} %</span>
+									  </div>
+									</progressbar>
+								  </div>
+								  
+								  <progress value-="50" max="100"/>
+								
 							</section>
 
 					</div>
 
-				<!-- Footer -->
-				<!-- <footer id="footer">
-					<section class="split contact">
-						<section class="alt">
-							<h3>Address</h3>
-							<p>서울특별시 금천구</p>
-						</section>
-						<section>
-							<h3>Kakao Id</h3>
-							<p>ID : Rs1991</p>
-						</section>
-						<section>
-							<h3>Email</h3>
-							<p>ssk8571@gmail.com</p>
-						</section>
-						<section>
-							<h3>Social</h3>
-							<ul class="icons alt">
-								<li><a href="https://dev-honey.notion.site/a0078c5035f4450e868835c1c2f8cc30" class="fa-solid fas fa-cube">  Notion  </a></li>
-								
-								<li><a href="https://velog.io/@chaos663" class="fa-brands fab fa-blogger">  Velog</a></li>
-								
-								<li><a href="https://github.com/chaos663" class="icon brands fa-github"> Github<span class="label">GitHub</span></a></li>
-							</ul>
-						</section>
-					</section>
-				</footer> -->
 
 			<!-- Copyright -->
 		<div id="copyright" 
@@ -139,4 +115,135 @@
 			<script src="assets/js/main.js"></script>
 
 	</body>
+	<style>
+		body {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #eee;
+}
+
+.progressbar-container {
+  width: 500px;
+  padding: 1rem;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.progress-value {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  font-size: .875rem;
+  padding-bottom: .25rem;
+}
+
+progress {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: block;
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  color: #273238;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #eee;
+  border-radius: 8px;
+}
+
+progress::-webkit-progress-value {
+  background-color: #273238;
+  border-radius: 8px;
+}
+
+progress::-moz-progress-bar {
+  background-color: #eee;
+  border-radius: 8px;
+}
+	</style>
+
+<script>
+	Vue.component('progressbar', {
+  template: `<div>
+                <slot></slot>
+                <progress :value="value" max="100"/>
+              </div>`,
+  props: {
+    target: {
+      type: Number
+    }
+  },
+  data () {
+    return {
+      value: 0,
+      interval: null
+    }
+  },
+  mounted () {
+    this.interval = setInterval(() => {
+      this.value++
+    }, 10)
+  },
+  watch: {
+    value (v) {
+      if (v === this.target) {
+        clearInterval(this.interval)
+      }
+    }
+  }
+})
+
+new Vue({
+  el: '.progressbar-container',
+  components: ['progressbar'],
+  data () {
+    return {
+      items: [
+        {
+          key: 'HTML/CSS',
+          value: 50,
+        },
+        {
+          key: 'JS',
+          value: 75
+        },
+        {
+          key: 'JAVA',
+          value: 100
+        },
+        {
+          key: 'PHP',
+          value: 90
+        }
+      ]
+    }
+  }
+})
+</script>
 </html>
